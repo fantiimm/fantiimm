@@ -155,7 +155,7 @@ Defesa em profundidade: se uma camada falhar, a próxima ainda protege.
 | Infra local | Podman + podman-compose (4 serviços) |
 | Infra produção | AWS EC2 |
 
-> *Repositório fechado — código pertence ao cliente que encomendou. Disposto a fazer demo do produto rodando ou conversar sobre arquitetura em entrevista técnica.*
+> *Repositório fechado — código de própriedade minha. Disposto a fazer demo do produto rodando ou conversar sobre arquitetura em entrevista técnica.*
 
 ---
 
