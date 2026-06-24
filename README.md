@@ -36,6 +36,21 @@ Trabalho hoje no setor de TI de uma empresa do agronegócio, onde construí do z
 
 ---
 
+## 📂 Código público
+
+Os dois projetos abaixo são de código fechado (operação corporativa / cliente).
+Para deixar o mecanismo inspecionável, extraí e **sanitizei** um dos padrões que
+uso em produção num repositório aberto, mínimo e testado:
+
+### 🔐 [`fastapi-multitenant-rls`](https://github.com/fantiimm/fastapi-multitenant-rls) &nbsp;![ci](https://github.com/fantiimm/fastapi-multitenant-rls/actions/workflows/ci.yml/badge.svg)
+
+Isolamento **multi-tenant em 3 camadas** — JWT + ContextVar + PostgreSQL Row-Level
+Security. Inclui o detalhe que faz a RLS realmente proteger (downgrade para um role
+`NOSUPERUSER` por request) e um teste que prova: mesmo um `SELECT` sem filtro de
+tenant não vaza dados de outro cliente. CI sobe Postgres e roda a suíte de isolamento.
+
+---
+
 ## 🌊 Pipeline ETL/CDC multi-site (projeto profissional)
 
 Plataforma de dados que replica em tempo quase-real **5 bases Postgres distribuídas geograficamente** para um data lake centralizado em cloud, alimentando dashboards operacionais e analíticos.
@@ -154,6 +169,9 @@ Defesa em profundidade: se uma camada falhar, a próxima ainda protege.
 | Infra produção | AWS EC2 |
 
 > *Repositório fechado — código de própriedade minha. Disposto a fazer demo do produto rodando ou conversar sobre arquitetura em entrevista técnica.*
+>
+> 💡 O padrão de isolamento multi-tenant deste sistema está extraído, sanitizado e
+> executável em [`fastapi-multitenant-rls`](https://github.com/fantiimm/fastapi-multitenant-rls).
 
 ---
 

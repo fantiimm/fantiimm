@@ -36,6 +36,21 @@ Currently working in the IT department of an agribusiness company, where I built
 
 ---
 
+## 📂 Open-source code
+
+Both projects below are closed-source (corporate / client operation). To keep the
+mechanism inspectable, I extracted and **sanitized** one of the patterns I run in
+production into a minimal, tested public repo:
+
+### 🔐 [`fastapi-multitenant-rls`](https://github.com/fantiimm/fastapi-multitenant-rls) &nbsp;![ci](https://github.com/fantiimm/fastapi-multitenant-rls/actions/workflows/ci.yml/badge.svg)
+
+**Three-layer multi-tenant isolation** — JWT + ContextVar + PostgreSQL Row-Level
+Security. Includes the detail that makes RLS actually enforce (per-request downgrade
+to a `NOSUPERUSER` role) and a test proving that even a `SELECT` with no tenant filter
+cannot leak another tenant's rows. CI spins up Postgres and runs the isolation suite.
+
+---
+
 ## 🌊 Multi-site ETL/CDC pipeline (professional project)
 
 Data platform that replicates **5 geographically distributed Postgres databases** in near-real-time to a centralized data lake in the cloud, feeding operational and analytical dashboards.
