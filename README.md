@@ -38,16 +38,29 @@ Trabalho hoje no setor de TI de uma empresa do agronegócio, onde construí do z
 
 ## 📂 Código público
 
-Os dois projetos abaixo são de código fechado (operação corporativa / cliente).
-Para deixar o mecanismo inspecionável, extraí e **sanitizei** um dos padrões que
-uso em produção num repositório aberto, mínimo e testado:
+Os projetos profissionais abaixo são de código fechado (operação corporativa / cliente).
+Para deixar o mecanismo inspecionável, extraí e **sanitizei** padrões que uso em
+produção em repositórios abertos, mínimos e testados (cada um com CI verde):
 
 ### 🔐 [`fastapi-multitenant-rls`](https://github.com/fantiimm/fastapi-multitenant-rls) &nbsp;![ci](https://github.com/fantiimm/fastapi-multitenant-rls/actions/workflows/ci.yml/badge.svg)
 
 Isolamento **multi-tenant em 3 camadas** — JWT + ContextVar + PostgreSQL Row-Level
 Security. Inclui o detalhe que faz a RLS realmente proteger (downgrade para um role
 `NOSUPERUSER` por request) e um teste que prova: mesmo um `SELECT` sem filtro de
-tenant não vaza dados de outro cliente. CI sobe Postgres e roda a suíte de isolamento.
+tenant não vaza dados de outro cliente. *(extraído do MotoGest)*
+
+### 🔁 [`cdc-reconciler`](https://github.com/fantiimm/cdc-reconciler) &nbsp;![ci](https://github.com/fantiimm/cdc-reconciler/actions/workflows/ci.yml/badge.svg)
+
+**Reconciliador batch↔stream** para replicação CDC: audita a tabela-destino contra a
+origem e **classifica** cada divergência pela causa (`in_progress` saudável vs
+`lost_delete` / `orphan_pk` / `lost_update`). A tese: stream de CDC não é fonte única
+de verdade. *(extraído do pipeline ETL/CDC)*
+
+### ⚙️ [`tinydaemon`](https://github.com/fantiimm/tinydaemon) &nbsp;![ci](https://github.com/fantiimm/tinydaemon/actions/workflows/ci.yml/badge.svg)
+
+Micro-lib **stdlib-only** para daemons de longa duração: loop com parada graciosa,
+`/metrics` Prometheus via `http.server` e `TTLCache`. **Zero dependências de runtime.**
+*(o esqueleto compartilhado dos meus daemons ETL)*
 
 ---
 
@@ -112,6 +125,10 @@ Cinco unidades operacionais com bases Postgres locais — cada uma escrevendo in
 - Particionar pelo timestamp do fluxo dá visibilidade gratuita de "o que ainda está em andamento"
 
 > *Código fechado por se tratar de operação corporativa, mas disposto a conversar sobre as decisões em entrevista técnica.*
+>
+> 💡 Dois padrões deste pipeline estão extraídos, sanitizados e executáveis:
+> o reconciler batch↔stream em [`cdc-reconciler`](https://github.com/fantiimm/cdc-reconciler)
+> e o esqueleto de daemon+métricas em [`tinydaemon`](https://github.com/fantiimm/tinydaemon).
 
 ---
 

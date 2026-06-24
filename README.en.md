@@ -38,16 +38,29 @@ Currently working in the IT department of an agribusiness company, where I built
 
 ## 📂 Open-source code
 
-Both projects below are closed-source (corporate / client operation). To keep the
-mechanism inspectable, I extracted and **sanitized** one of the patterns I run in
-production into a minimal, tested public repo:
+The professional projects below are closed-source (corporate / client operation). To
+keep the mechanism inspectable, I extracted and **sanitized** patterns I run in
+production into minimal, tested public repos (each with green CI):
 
 ### 🔐 [`fastapi-multitenant-rls`](https://github.com/fantiimm/fastapi-multitenant-rls) &nbsp;![ci](https://github.com/fantiimm/fastapi-multitenant-rls/actions/workflows/ci.yml/badge.svg)
 
 **Three-layer multi-tenant isolation** — JWT + ContextVar + PostgreSQL Row-Level
 Security. Includes the detail that makes RLS actually enforce (per-request downgrade
 to a `NOSUPERUSER` role) and a test proving that even a `SELECT` with no tenant filter
-cannot leak another tenant's rows. CI spins up Postgres and runs the isolation suite.
+cannot leak another tenant's rows. *(extracted from MotoGest)*
+
+### 🔁 [`cdc-reconciler`](https://github.com/fantiimm/cdc-reconciler) &nbsp;![ci](https://github.com/fantiimm/cdc-reconciler/actions/workflows/ci.yml/badge.svg)
+
+**Batch↔stream reconciler** for CDC replication: audits the target table against the
+source and **classifies** each divergence by cause (healthy `in_progress` vs
+`lost_delete` / `orphan_pk` / `lost_update`). The thesis: a CDC stream is not a single
+source of truth. *(extracted from the ETL/CDC pipeline)*
+
+### ⚙️ [`tinydaemon`](https://github.com/fantiimm/tinydaemon) &nbsp;![ci](https://github.com/fantiimm/tinydaemon/actions/workflows/ci.yml/badge.svg)
+
+**stdlib-only** micro-lib for long-running daemons: graceful-shutdown loop, Prometheus
+`/metrics` over `http.server`, and a `TTLCache`. **Zero runtime dependencies.**
+*(the shared skeleton of my ETL daemons)*
 
 ---
 
@@ -112,6 +125,10 @@ Five operational sites, each with its own local Postgres — all writing indepen
 - Partitioning by flow timestamp gives you "what's still in-progress" visibility for free
 
 > *Source code is closed since it's a corporate operation, but happy to discuss design decisions in a technical interview.*
+>
+> 💡 Two patterns from this pipeline are extracted, sanitized and runnable:
+> the batch↔stream reconciler in [`cdc-reconciler`](https://github.com/fantiimm/cdc-reconciler)
+> and the daemon+metrics skeleton in [`tinydaemon`](https://github.com/fantiimm/tinydaemon).
 
 ---
 
