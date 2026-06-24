@@ -32,8 +32,6 @@ Currently working in the IT department of an agribusiness company, where I built
 
 ## 📊 GitHub
 
-![Followers](https://img.shields.io/github/followers/fantiimm?label=Followers&style=for-the-badge&logo=github&color=181717)
-![Repos](https://img.shields.io/badge/dynamic/json?label=Public%20Repos&query=%24.public_repos&url=https%3A%2F%2Fapi.github.com%2Fusers%2Ffantiimm&style=for-the-badge&logo=github&color=181717)
 ![Profile views](https://komarev.com/ghpvc/?username=fantiimm&label=Profile%20views&style=for-the-badge&color=181717)
 
 ---
