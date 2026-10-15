@@ -66,18 +66,18 @@ Micro-lib **stdlib-only** para daemons de longa duração: loop com parada graci
 
 ## 🌊 Pipeline ETL/CDC multi-site (projeto profissional)
 
-Plataforma de dados que replica em tempo quase-real **5 bases Postgres distribuídas geograficamente** para um data lake centralizado em cloud, alimentando dashboards operacionais e analíticos.
+Plataforma de dados que replica em tempo quase-real **3 bases Postgres distribuídas geograficamente** para um data lake centralizado em cloud, alimentando dashboards operacionais e analíticos.
 
 ### Por que existe
 
-Cinco unidades operacionais com bases Postgres locais — cada uma escrevendo independentemente. Sem visibilidade consolidada do negócio em tempo real, decisões eram tomadas com dados defasados em horas ou dias.
+Três unidades operacionais com bases Postgres locais — cada uma escrevendo independentemente. Sem visibilidade consolidada do negócio em tempo real, decisões eram tomadas com dados defasados em horas ou dias.
 
 ### Arquitetura Lambda — batch + streaming em paralelo
 
 ```
 ┌─ Filiais (Postgres 17, cada uma com schema próprio) ─┐
 │                                                       │
-│   filial-1   filial-2   filial-3   [+ outras]         │
+│   filial-1   filial-2   filial-3                      │
 │      │          │          │                          │
 └──────┼──────────┼──────────┼──────────────────────────┘
        │ WAL/CDC     └──── batch SELECT (Airflow DAGs)

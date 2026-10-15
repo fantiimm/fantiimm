@@ -66,18 +66,18 @@ source of truth. *(extracted from the ETL/CDC pipeline)*
 
 ## 🌊 Multi-site ETL/CDC pipeline (professional project)
 
-Data platform that replicates **5 geographically distributed Postgres databases** in near-real-time to a centralized data lake in the cloud, feeding operational and analytical dashboards.
+Data platform that replicates **3 geographically distributed Postgres databases** in near-real-time to a centralized data lake in the cloud, feeding operational and analytical dashboards.
 
 ### Why it exists
 
-Five operational sites, each with its own local Postgres — all writing independently. Without consolidated business visibility in real time, decisions were being made on data hours or days old.
+Three operational sites, each with its own local Postgres — all writing independently. Without consolidated business visibility in real time, decisions were being made on data hours or days old.
 
 ### Lambda architecture — batch + streaming in parallel
 
 ```
 ┌─ Branches (Postgres 17, each with its own schema) ───┐
 │                                                       │
-│   site-1    site-2    site-3   [+ others]            │
+│   site-1    site-2    site-3                         │
 │     │         │         │                             │
 └─────┼─────────┼─────────┼─────────────────────────────┘
       │ WAL/CDC    └─── batch SELECT (Airflow DAGs)
